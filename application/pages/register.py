@@ -21,8 +21,10 @@ if submit:
     result = register(email, password)
     if result == "success":
         st.success("Registration successful!")
-        if st.session_state.profile == "Institute":
-            switch_page("institute")
+        if st.session_state.profile == "Central Authority":
+            switch_page("central-authority")
+        elif st.session_state.profile == "Producer":
+            switch_page("producer")
         else:
             switch_page("verifier")
     else:

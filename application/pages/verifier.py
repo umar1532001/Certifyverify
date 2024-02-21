@@ -22,16 +22,16 @@ if selected == options[0]:
         with open("certificate.pdf", "wb") as file:
             file.write(bytes_data)
         try:
-            (uid, candidate_name, course_name, org_name) = extract_certificate("certificate.pdf")
+            print(bytes_data)
             displayPDF("certificate.pdf")
             os.remove("certificate.pdf")
-
             # Calculating hash
-            data_to_hash = f"{uid}{candidate_name}{course_name}{org_name}".encode('utf-8')
-            certificate_id = hashlib.sha256(data_to_hash).hexdigest()
-
+            # data_to_hash = f"{customer_id}{customer_name}{energy_source}{capacity_generated}{powerhouse_id}{powerhouse_name}{date_of_claim}".encode('utf-8')
+            certificate_id = hashlib.sha256(bytes_data).hexdigest()
             # Smart Contract Call
+
             result = contract.functions.isVerified(certificate_id).call()
+
             if result:
                 st.success("Certificated validated successfully!")
             else:
